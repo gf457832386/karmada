@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"github.com/karmada-io/karmada/pkg/scheduler/framework/plugins/clusterproperty"
 	"time"
 
 	jsonpatch "github.com/evanphx/json-patch/v5"
@@ -100,7 +101,7 @@ func NewScheduler(dynamicClient dynamic.Interface, karmadaClient karmadaclientse
 	queue := workqueue.NewRateLimitingQueue(workqueue.DefaultControllerRateLimiter())
 	schedulerCache := schedulercache.NewCache(clusterLister)
 	// TODO: make plugins as a flag
-	algorithm := core.NewGenericScheduler(schedulerCache, []string{clusteraffinity.Name, tainttoleration.Name, apiinstalled.Name, clusterlocality.Name})
+	algorithm := core.NewGenericScheduler(schedulerCache, []string{clusteraffinity.Name, tainttoleration.Name, apiinstalled.Name, clusterlocality.Name, clusterproperty.Name})
 	sched := &Scheduler{
 		DynamicClient:            dynamicClient,
 		KarmadaClient:            karmadaClient,

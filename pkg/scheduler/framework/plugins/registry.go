@@ -5,6 +5,7 @@ import (
 	"github.com/karmada-io/karmada/pkg/scheduler/framework/plugins/apiinstalled"
 	"github.com/karmada-io/karmada/pkg/scheduler/framework/plugins/clusteraffinity"
 	"github.com/karmada-io/karmada/pkg/scheduler/framework/plugins/clusterlocality"
+	"github.com/karmada-io/karmada/pkg/scheduler/framework/plugins/clusterproperty"
 	"github.com/karmada-io/karmada/pkg/scheduler/framework/plugins/tainttoleration"
 )
 
@@ -15,5 +16,6 @@ func NewPlugins() map[string]framework.Plugin {
 		tainttoleration.Name: tainttoleration.New(),
 		apiinstalled.Name:    apiinstalled.New(),
 		clusterlocality.Name: clusterlocality.New(),
+		clusterproperty.Name: clusterproperty.New(),
 	}
 }

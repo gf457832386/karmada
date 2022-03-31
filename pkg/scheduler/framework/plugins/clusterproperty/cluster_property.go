@@ -2,7 +2,6 @@ package clusterproperty
 
 import (
 	"context"
-	"fmt"
 	clusterv1alpha1 "github.com/karmada-io/karmada/pkg/apis/cluster/v1alpha1"
 	policyv1alpha1 "github.com/karmada-io/karmada/pkg/apis/policy/v1alpha1"
 	workv1alpha2 "github.com/karmada-io/karmada/pkg/apis/work/v1alpha2"
@@ -36,11 +35,11 @@ func (p *ClusterProperty) Filter(ctx context.Context, placement *policyv1alpha1.
 	for i, _ := range placement.SpreadConstraints {
 		spreadConstraint := placement.SpreadConstraints[i] //每一个元素里是一个结构体，一个结构体四个元素,SpreadByField为其中一个
 		if spreadConstraint.SpreadByField == policyv1alpha1.SpreadByFieldProvider && cluster.Spec.Provider == "" {
-			return framework.NewResult(framework.Unschedulable, fmt.Sprintf("cluster didn't have the Provider Property"))
+			return framework.NewResult(framework.Unschedulable, "No Provider Property in the Cluster.Spec")
 		} else if spreadConstraint.SpreadByField == policyv1alpha1.SpreadByFieldRegion && cluster.Spec.Region == "" {
-			return framework.NewResult(framework.Unschedulable, fmt.Sprintf("cluster didn't have the Region Property"))
+			return framework.NewResult(framework.Unschedulable, "cluster didn't have the Region Property")
 		} else if spreadConstraint.SpreadByField == policyv1alpha1.SpreadByFieldZone && cluster.Spec.Zone == "" {
-			return framework.NewResult(framework.Unschedulable, fmt.Sprintf("cluster didn't have the Zone Property"))
+			return framework.NewResult(framework.Unschedulable, "cluster didn't have the Zone Property")
 		}
 	}
 

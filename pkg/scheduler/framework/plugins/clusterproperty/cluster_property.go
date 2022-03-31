@@ -13,7 +13,7 @@ const (
 	Name = "ClusterProperty"
 )
 
-// ClusterProperty is a plugin that checks if a resource selector matches the cluster label.
+// ClusterProperty is a plugin that checks if property in the Cluster.Spec.
 type ClusterProperty struct{}
 
 var _ framework.FilterPlugin = &ClusterProperty{}
@@ -29,11 +29,10 @@ func (p *ClusterProperty) Name() string {
 }
 
 // Filter checks if the cluster Provider/Zone/Region Property is null.
-//配置了某一类型的spreadConstraint,则cluster必须存在对应的信息，假如cluster上没有provider信息，但是spreadConstraint配置了provider约束，则该cluster将被filter
 func (p *ClusterProperty) Filter(ctx context.Context, placement *policyv1alpha1.Placement, resource *workv1alpha2.ObjectReference, cluster *clusterv1alpha1.Cluster) *framework.Result {
 
 	for i, _ := range placement.SpreadConstraints {
-		spreadConstraint := placement.SpreadConstraints[i] //每一个元素里是一个结构体，一个结构体四个元素,SpreadByField为其中一个
+		spreadConstraint := placement.SpreadConstraints[i]
 		if spreadConstraint.SpreadByField == policyv1alpha1.SpreadByFieldProvider && cluster.Spec.Provider == "" {
 			return framework.NewResult(framework.Unschedulable, "No Provider Property in the Cluster.Spec")
 		} else if spreadConstraint.SpreadByField == policyv1alpha1.SpreadByFieldRegion && cluster.Spec.Region == "" {

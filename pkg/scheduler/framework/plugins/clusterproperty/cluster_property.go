@@ -37,9 +37,9 @@ func (p *ClusterProperty) Filter(ctx context.Context, placement *policyv1alpha1.
 		if spreadConstraint.SpreadByField == policyv1alpha1.SpreadByFieldProvider && cluster.Spec.Provider == "" {
 			return framework.NewResult(framework.Unschedulable, "No Provider Property in the Cluster.Spec")
 		} else if spreadConstraint.SpreadByField == policyv1alpha1.SpreadByFieldRegion && cluster.Spec.Region == "" {
-			return framework.NewResult(framework.Unschedulable, "cluster didn't have the Region Property")
+			return framework.NewResult(framework.Unschedulable, "No Region Property in the Cluster.Spec")
 		} else if spreadConstraint.SpreadByField == policyv1alpha1.SpreadByFieldZone && cluster.Spec.Zone == "" {
-			return framework.NewResult(framework.Unschedulable, "cluster didn't have the Zone Property")
+			return framework.NewResult(framework.Unschedulable, "No Zone Property in the Cluster.Spec")
 		}
 	}
 

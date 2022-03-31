@@ -28,7 +28,7 @@ func selectBestClustersBySpreadConstraints(spreadConstraints []policyv1alpha1.Sp
 	}
 
 	spreadConstraint := spreadConstraints[0]
-	if spreadConstraint.SpreadByField == policyv1alpha1.SpreadByFieldCluster {
+	if spreadConstraint.SpreadByField == policyv1alpha1.SpreadByFieldProvider {
 		return selectBestClustersByCluster(spreadConstraint, groupClustersInfo)
 	}
 

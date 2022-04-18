@@ -19,6 +19,7 @@ import (
 
 var _ = ginkgo.Describe("propagation with spreadConstraint testing", func() {
 	ginkgo.Context("spreadConstraint testing", func() {
+		klog.Infof("testtt")
 		policyNamespace := testNamespace
 		policyName := deploymentNamePrefix + rand.String(RandomStrLength)
 		deploymentNamespace := testNamespace

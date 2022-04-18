@@ -3,6 +3,9 @@ package e2e
 import (
 	"context"
 	"fmt"
+
+	"k8s.io/klog/v2"
+
 	"github.com/onsi/ginkgo"
 	"github.com/onsi/gomega"
 	"k8s.io/apimachinery/pkg/util/rand"
@@ -102,6 +105,8 @@ var _ = ginkgo.Describe("propagation with spreadConstraint testing", func() {
 				targetClusterNames := framework.ExtractTargetClustersFrom(controlPlaneClient, deployment)
 				fmt.Println(len(targetClusterNames))
 				fmt.Println(targetClusterNames)
+				klog.Infof("长度(%s)", len(targetClusterNames))
+				klog.Infof("筛选的内容(%s)", targetClusterNames)
 				gomega.Expect(len(targetClusterNames) == 1).Should(gomega.BeTrue())
 				gomega.Expect(targetClusterNames[0] == desiredScheduleResult).Should(gomega.BeTrue())
 			})

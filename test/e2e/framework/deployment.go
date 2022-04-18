@@ -118,7 +118,9 @@ func UpdateDeploymentVolumes(client kubernetes.Interface, deployment *appsv1.Dep
 func ExtractTargetClustersFrom(c client.Client, deployment *appsv1.Deployment) []string {
 	bindingName := names.GenerateBindingName(deployment.Kind, deployment.Name)
 	binding := &workv1alpha2.ResourceBinding{}
+	//test
 	klog.Infof("testtt7(%s)", binding.Spec.Clusters)
+
 	gomega.Eventually(func(g gomega.Gomega) (bool, error) {
 		err := c.Get(context.TODO(), client.ObjectKey{Namespace: deployment.Namespace, Name: bindingName}, binding)
 		g.Expect(err).NotTo(gomega.HaveOccurred())

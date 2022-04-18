@@ -63,6 +63,7 @@ var _ = ginkgo.Describe("propagation with spreadConstraint testing", func() {
 					fmt.Printf("setting provider and region for cluster %v\n", cluster)
 					gomega.Eventually(func(g gomega.Gomega) {
 						clusterObj := &clusterv1alpha1.Cluster{}
+
 						err := controlPlaneClient.Get(context.TODO(), client.ObjectKey{Name: cluster}, clusterObj)
 						g.Expect(err).NotTo(gomega.HaveOccurred())
 						klog.Infof("testtt2")
@@ -70,6 +71,8 @@ var _ = ginkgo.Describe("propagation with spreadConstraint testing", func() {
 						originalClusterRegionInfo[cluster] = clusterObj.Spec.Region
 						clusterObj.Spec.Provider = providerMap[index]
 						clusterObj.Spec.Region = regionMap[index]
+						klog.Infof("testtt2(%s)", clusterObj.Spec.Provider)
+						klog.Infof("testtt2(%s)", clusterObj.Spec.Region)
 						err = controlPlaneClient.Update(context.TODO(), clusterObj)
 						g.Expect(err).NotTo(gomega.HaveOccurred())
 					}, pollTimeout, pollInterval).Should(gomega.Succeed())

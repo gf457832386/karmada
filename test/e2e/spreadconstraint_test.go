@@ -100,6 +100,8 @@ var _ = ginkgo.Describe("propagation with spreadConstraint testing", func() {
 
 			ginkgo.By("check whether deployment is scheduled to clusters which meeting the spreadConstraint requirements", func() {
 				targetClusterNames := framework.ExtractTargetClustersFrom(controlPlaneClient, deployment)
+				fmt.Println(len(targetClusterNames))
+				fmt.Println(targetClusterNames)
 				gomega.Expect(len(targetClusterNames) == 1).Should(gomega.BeTrue())
 				gomega.Expect(targetClusterNames[0] == desiredScheduleResult).Should(gomega.BeTrue())
 			})

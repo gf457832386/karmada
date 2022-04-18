@@ -37,9 +37,9 @@ var _ = ginkgo.Describe("propagation with spreadConstraint testing", func() {
 			{
 				SpreadByField: policyv1alpha1.SpreadFieldValue("provider"),
 			},
-			{
-				SpreadByField: policyv1alpha1.SpreadFieldValue("region"),
-			},
+			//{
+			//	SpreadByField: policyv1alpha1.SpreadFieldValue("region"),
+			//},
 		}
 
 		policy := helper.NewPropagationPolicy(policyNamespace, policyName, []policyv1alpha1.ResourceSelector{

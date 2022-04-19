@@ -35,8 +35,8 @@ var _ = ginkgo.Describe("propagation with spreadConstraint testing", func() {
 		// desire to schedule to clusters having spreadConstraint provider/region/zone property
 		spreadConstraints := []policyv1alpha1.SpreadConstraint{
 			{
-				//SpreadByField: policyv1alpha1.SpreadFieldValue("provider"),
-				SpreadByField: policyv1alpha1.SpreadByFieldCluster,
+				SpreadByField: policyv1alpha1.SpreadFieldValue("provider"),
+				//SpreadByField: policyv1alpha1.SpreadByFieldCluster,
 			},
 			//{
 			//SpreadByField: policyv1alpha1.SpreadFieldValue("region"),
@@ -50,6 +50,9 @@ var _ = ginkgo.Describe("propagation with spreadConstraint testing", func() {
 				Name:       deployment.Name,
 			},
 		}, policyv1alpha1.Placement{
+			ClusterAffinity: &policyv1alpha1.ClusterAffinity{
+				ClusterNames: framework.ClusterNames(),
+			},
 			SpreadConstraints: spreadConstraints,
 		})
 

@@ -32,17 +32,17 @@ var _ = ginkgo.Describe("propagation with spreadConstraint testing", func() {
 		desiredScheduleResult := "member1"
 
 		// desire to schedule to clusters having spreadConstraint provider/region/zone property
-		spreadConstraints := []policyv1alpha1.SpreadConstraint{
-			{
-				//SpreadByField: policyv1alpha1.SpreadByFieldCluster,
-				//SpreadByField: policyv1alpha1.SpreadFieldValue("provider"),
-				//SpreadByField: policyv1alpha1.SpreadByFieldCluster,
-				//SpreadByField: policyv1alpha1.SpreadByFieldCluster,
-			},
-			//{
-			//SpreadByField: policyv1alpha1.SpreadFieldValue("region"),
-			//},
-		}
+		//spreadConstraints := []policyv1alpha1.SpreadConstraint{
+		//	{
+		//SpreadByField: policyv1alpha1.SpreadByFieldCluster,
+		//SpreadByField: policyv1alpha1.SpreadFieldValue("provider"),
+		//SpreadByField: policyv1alpha1.SpreadByFieldCluster,
+		//SpreadByField: policyv1alpha1.SpreadByFieldCluster,
+		//	},
+		//{
+		//SpreadByField: policyv1alpha1.SpreadFieldValue("region"),
+		//},
+		//}
 
 		policy := helper.NewPropagationPolicy(policyNamespace, policyName, []policyv1alpha1.ResourceSelector{
 			{
@@ -54,7 +54,7 @@ var _ = ginkgo.Describe("propagation with spreadConstraint testing", func() {
 			ClusterAffinity: &policyv1alpha1.ClusterAffinity{
 				ClusterNames: framework.ClusterNames(),
 			},
-			SpreadConstraints: spreadConstraints,
+			//SpreadConstraints: spreadConstraints,
 		})
 
 		ginkgo.BeforeEach(func() { //给各个集群赋值属性

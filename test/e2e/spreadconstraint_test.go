@@ -36,6 +36,7 @@ var _ = ginkgo.Describe("propagation with spreadConstraint testing", func() {
 		spreadConstraints := []policyv1alpha1.SpreadConstraint{
 			{
 				//SpreadByField: policyv1alpha1.SpreadFieldValue("provider"),
+				//SpreadByField: policyv1alpha1.SpreadByFieldCluster,
 				SpreadByField: policyv1alpha1.SpreadByFieldCluster,
 			},
 			//{
@@ -109,7 +110,7 @@ var _ = ginkgo.Describe("propagation with spreadConstraint testing", func() {
 			framework.CreateDeployment(kubeClient, deployment)
 
 			ginkgo.By("check whether deployment is scheduled to clusters which meeting the spreadConstraint requirements", func() {
-
+				//
 				targetClusterNames := framework.ExtractTargetClustersFrom(controlPlaneClient, deployment)
 				klog.Infof("length(%s)", len(targetClusterNames))
 				klog.Infof("targetClusterNames(%s)", targetClusterNames)

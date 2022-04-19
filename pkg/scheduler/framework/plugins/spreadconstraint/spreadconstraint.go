@@ -3,6 +3,8 @@ package spreadconstraint
 import (
 	"context"
 
+	"k8s.io/klog/v2"
+
 	clusterv1alpha1 "github.com/karmada-io/karmada/pkg/apis/cluster/v1alpha1"
 	policyv1alpha1 "github.com/karmada-io/karmada/pkg/apis/policy/v1alpha1"
 	workv1alpha2 "github.com/karmada-io/karmada/pkg/apis/work/v1alpha2"
@@ -32,6 +34,8 @@ func (p *SpreadConstraint) Name() string {
 // Filter checks if the cluster Provider/Zone/Region spread is null.
 func (p *SpreadConstraint) Filter(ctx context.Context, placement *policyv1alpha1.Placement, resource *workv1alpha2.ObjectReference, cluster *clusterv1alpha1.Cluster) *framework.Result {
 	for _, spreadConstraint := range placement.SpreadConstraints {
+		// 待验证
+		klog.Infof("maph(%s)", spreadConstraint) //  查看一下这个placement.SpreadConstraints 是不是cluster
 		if spreadConstraint.SpreadByField == policyv1alpha1.SpreadByFieldProvider && cluster.Spec.Provider == "" {
 			return framework.NewResult(framework.Unschedulable, "No Provider Property in the Cluster.Spec")
 		} else if spreadConstraint.SpreadByField == policyv1alpha1.SpreadByFieldRegion && cluster.Spec.Region == "" {

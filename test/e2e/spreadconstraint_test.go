@@ -35,8 +35,8 @@ var _ = ginkgo.Describe("propagation with spreadConstraint testing", func() {
 		// desire to schedule to clusters having spreadConstraint provider/region/zone property
 		spreadConstraints := []policyv1alpha1.SpreadConstraint{
 			{
-				SpreadByField: policyv1alpha1.SpreadFieldValue("provider"),
-				//SpreadByField: policyv1alpha1.SpreadByFieldCluster,
+				//SpreadByField: policyv1alpha1.SpreadFieldValue("provider"),
+				SpreadByField: policyv1alpha1.SpreadByFieldCluster,
 			},
 			//{
 			//SpreadByField: policyv1alpha1.SpreadFieldValue("region"),
@@ -67,7 +67,6 @@ var _ = ginkgo.Describe("propagation with spreadConstraint testing", func() {
 					fmt.Printf("setting provider and region for cluster %v\n", cluster)
 					gomega.Eventually(func(g gomega.Gomega) {
 						clusterObj := &clusterv1alpha1.Cluster{}
-
 						err := controlPlaneClient.Get(context.TODO(), client.ObjectKey{Name: cluster}, clusterObj)
 						g.Expect(err).NotTo(gomega.HaveOccurred())
 						klog.Infof("testtt2")
@@ -115,7 +114,7 @@ var _ = ginkgo.Describe("propagation with spreadConstraint testing", func() {
 				klog.Infof("length(%s)", len(targetClusterNames))
 				klog.Infof("targetClusterNames(%s)", targetClusterNames)
 				klog.Infof("testtt4")
-				gomega.Expect(len(targetClusterNames) == 1).Should(gomega.BeTrue())
+				gomega.Expect(len(targetClusterNames) == 2).Should(gomega.BeTrue())
 				klog.Infof("testtt5")
 				gomega.Expect(targetClusterNames[0] == desiredScheduleResult).Should(gomega.BeTrue())
 			})

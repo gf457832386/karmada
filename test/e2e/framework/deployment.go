@@ -124,7 +124,7 @@ func ExtractTargetClustersFrom(c client.Client, deployment *appsv1.Deployment) [
 	gomega.Eventually(func(g gomega.Gomega) (bool, error) {
 		err := c.Get(context.TODO(), client.ObjectKey{Namespace: deployment.Namespace, Name: bindingName}, binding)
 		g.Expect(err).NotTo(gomega.HaveOccurred())
-
+		klog.Infof("testtt8err(%s)", err)
 		if !helper.IsBindingScheduled(&binding.Status) {
 			klog.Infof("The ResourceBinding(%s/%s) hasn't been scheduled.", binding.Namespace, binding.Name)
 			return false, nil

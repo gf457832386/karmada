@@ -51,9 +51,9 @@ var _ = ginkgo.Describe("propagation with spreadConstraint testing", func() {
 				Name:       deployment.Name,
 			},
 		}, policyv1alpha1.Placement{
-			ClusterAffinity: &policyv1alpha1.ClusterAffinity{
-				ClusterNames: framework.ClusterNames(),
-			},
+			//ClusterAffinity: &policyv1alpha1.ClusterAffinity{
+			//	ClusterNames: framework.ClusterNames(),
+			//},
 			SpreadConstraints: spreadConstraints,
 		})
 
